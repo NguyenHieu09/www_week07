@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+          crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+            crossorigin="anonymous">
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <div class="container-fluid">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/product}">Product</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/customer}">Customer</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/cart}">Cart</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container py-5" th:if="${productDetail != null}">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6 col-xl-4">
+            <div class="card text-black">
+                <i class="fab fa-apple fa-lg pt-3 pb-1 px-3"></i>
+                <img th:src="${productDetail.productImage}" style="width: 60px; height: 60px; align-self: center" class="card-img-top" alt="product" />
+                <div class="card-body">
+                    <div class="text-center">
+                        <h5 class="card-title" th:text="${productDetail.name}"></h5>
+                        <p class="text-muted mb-4" th:text="${productDetail.description}"></p>
+                    </div>
+                    <div>
+                        <div class="d-flex justify-content-between">
+                            <span>Unit</span><span th:text="${productDetail.unit}"></span>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <span>Manufacturer</span><span th:text="${productDetail.manufacturer}"></span>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <span>Price</span><span th:text="${productDetail.price}"></span>
+                        </div>
+                    </div>
+
+                    <form th:action="@{'/' + ${productDetail.id} + '/addToCart'}" method="post">
+
+                        <div class="d-flex justify-content-between total font-weight-bold mt-4">
+                            <span>Quantity</span>
+                            <input type="number" name="quantity" id="quantity" value="1">
+                        </div>
+                        <button type="submit" class="btn btn-success" style="margin-left: 40%; margin-top: 30px">Add to cart</button>
+                    </form>
+
+                    <!--                    <div class="d-flex justify-content-between total font-weight-bold mt-4">-->
+<!--                        <span>Quantity</span>-->
+<!--                        <input type="number" name="quantity" id="quantity">-->
+<!--                    </div>-->
+<!--                    <button value="addCart" name="action" type="submit" class="btn btn-success" style="margin-left: 40%;margin-top: 30px">Add to cart</button>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+</body>
+</html>
